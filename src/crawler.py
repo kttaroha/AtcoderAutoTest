@@ -2,6 +2,8 @@ from login import Login
 from bs4 import BeautifulSoup
 from pathlib import Path
 import os
+from urllib import request
+from urllib.error import URLError, HTTPError
 
 
 class Crawler(object):
@@ -39,8 +41,13 @@ class Crawler(object):
             with open(output_path.joinpath(test_answer_file), mode="w") as w:
                 w.write(test_answer)
 
-    
-            
+    def check_url_existance(self, url):
+        try:
+            request.urlopen(url)
+            return True
+        except (URLError, HTTPError):
+            return False
+
 
 
 
@@ -48,3 +55,4 @@ class Crawler(object):
 if __name__ == "__main__":
     c = Crawler()
     c.output_test_cases("https://atcoder.jp/contests/abc160/tasks/abc160_b", "../ABC160_B")
+    print(c.check_url_existance("https://atcoder.jp/contests/abc160/tasks/abc160_g"))
