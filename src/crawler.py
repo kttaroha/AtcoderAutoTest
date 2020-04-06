@@ -7,10 +7,13 @@ from urllib.error import URLError, HTTPError
 
 
 class Crawler(object):
-    def __init__(self):
+    def __init__(self, contest_name, base_savepath="./cases"):
         login = Login()
         login.login()
+        self.base_savepath = Path(base_savepath)
+        os.makedirs(self.base_savepath, exist_ok=True)
         self.session = login.session
+        self.contest_name = contest_name.lower()
 
     def fetch_test_cases(self, url_problem):
         content = self.session.get(url_problem)
@@ -48,11 +51,15 @@ class Crawler(object):
         except (URLError, HTTPError):
             return False
 
-
-
-
-
-if __name__ == "__main__":
-    c = Crawler()
-    c.output_test_cases("https://atcoder.jp/contests/abc160/tasks/abc160_b", "../ABC160_B")
-    print(c.check_url_existance("https://atcoder.jp/contests/abc160/tasks/abc160_g"))
+    def run(self):
+        base_url = "https://atcoder.jp/contests/"
+        problem_nums = ["a", "b", "c", "d", "e", "f"]
+        contest_url = f'{base_url}{self.contest_name}/tasks/'
+        for n in problem_nums:
+            problem_url = f"{contest_url}{self.contest_name}_{n}"
+            if self.check_url_existance(problem_url):
+                save_dir = f"{self.contest_name}{n}".upper()
+                save_path = self.base_savepath.joinpath(save_dir)
+                self.output_test_cases(problem_url, save_path)
+            else:
+                print(f"{problem_url} dose not exist!")
