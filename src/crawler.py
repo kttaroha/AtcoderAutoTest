@@ -44,7 +44,8 @@ class Crawler(object):
             with open(output_path.joinpath(test_answer_file), mode="w") as w:
                 w.write(test_answer)
 
-    def check_url_existance(self, url):
+    @staticmethod
+    def check_url_existance(url):
         try:
             request.urlopen(url)
             return True
