@@ -28,7 +28,10 @@ class Executor(object):
             inp_ans_set[inp] = ans
         return inp_ans_set
 
-    def excute_test_cases(self, problem_name, py_file):
+    def excute_test_cases(self, problem_name):
+        for pfile in self.py_files:
+            if pfile[-4] == problem_name:
+                py_file = pfile
         test_sets = self.get_test_sets(problem_name)
         test_num = 0
         correct_num = 0
@@ -45,7 +48,7 @@ class Executor(object):
             if result.stdout == answer:
                 correct_num += 1
             else:
-                print(f"Failed: {test_num+1}")
+                print(f"Failed: {test_num}")
 
         if correct_num == test_num:
             print("Passed all test cases!")
