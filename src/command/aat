@@ -1,0 +1,18 @@
+# !/bin/bash
+
+mode=$1
+contest_name=$2
+problem_name=$3
+
+python_path="$(cd $(dirname $0); cd ../; pwd)/main.py"
+
+if [ "$mode" = "s" ]; then
+    echo "setup mode"
+    python $python_path $contest_name -s
+
+fi 
+
+if [ "$mode" = "p" ]; then
+    echo "excute mode"
+    python $python_path $contest_name -p $problem_name
+fi
