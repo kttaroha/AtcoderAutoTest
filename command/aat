@@ -4,7 +4,7 @@ mode=$1
 contest_name=$2
 problem_name=$3
 
-python_path="$(cd $(dirname $0); cd ../; pwd)/main.py"
+python_path="$(cd $(dirname $0); cd ../src; pwd)/main.py"
 
 if [ "$mode" = "s" ]; then
     echo "setup mode"
