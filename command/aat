@@ -9,7 +9,6 @@ python_path="$(cd $(dirname $0); cd ../src; pwd)/main.py"
 if [ "$mode" = "s" ]; then
     echo "setup mode"
     python $python_path $contest_name -s
-
 fi 
 
 if [ "$mode" = "p" ]; then
