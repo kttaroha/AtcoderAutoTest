@@ -67,3 +67,5 @@ Expected: 想定していた出力
   
 Actual: 実際の出力  
 ```
+
+Let's Enjoy AtCoder life!
